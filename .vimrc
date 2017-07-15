@@ -1,34 +1,53 @@
-"" Vundle settings 
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-                                       
-" Vundle plugins
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'craigemery/vim-autotag'
-Plugin 'scrooloose/syntastic'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'tpope/vim-fugitive'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'othree/yajs.vim'
-Plugin 'flazz/vim-colorschemes'
+call plug#begin()
 
+" Plug 
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'craigemery/vim-autotag'
+Plug 'w0rp/ale'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'tpope/vim-fugitive'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'othree/yajs.vim'
+Plug 'fatih/vim-go'
+Plug 'Valloric/YouCompleteMe'
+Plug 'jiangmiao/auto-pairs'
+Plug 'liuchengxu/space-vim-dark'
+Plug 'vimwiki/vimwiki'
+Plug 'rizzatti/dash.vim'
 
 " Vundle end
-call vundle#end()
+call plug#end()
 filetype indent plugin on
+filetype plugin on
 syntax enable
+
+""" Vim settings
+set relativenumber
+set number
+set shiftwidth=4 tabstop=4 expandtab
+set hlsearch
+set autoindent
+set autoread
+set grepprg=ack\ --nogroup\ --column\ $*
+set grepformat=%f:%l:%c:%m
+let mapleader = "\<Space>"
+
+" Theme
+colorscheme space-vim-dark
+let g:airline_theme='tomorrow'
+"let g:airline_theme='base16_spacemacs'
 
 " Airline settings
 set laststatus=2
-"""let g:airline_theme='tomorrow'
 
 " NERDTree settings
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -37,7 +56,7 @@ map <C-n> :NERDTreeToggle<CR>
 " CtrlP settings
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,node_modules,log
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,node_modules,log,*.pyc
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\.git*\|log\|\node_modules\|tmp$',
       \ 'file': '\.DS_STORE$',
@@ -55,12 +74,5 @@ nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%81v.\+/
 
-""" Misc
-set number
-set relativenumber 
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set hlsearch
-set autoindent
-set autoread
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
